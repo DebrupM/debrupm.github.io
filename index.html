@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Debrup • Professional Badges & Certificates</title>
+  <meta name="description" content="Debrup — Showcasing professional badges and certificates with hours and benefits." />
+  <meta name="theme-color" content="#0a84ff" />
+  <style>
+    /* ---------------------
+       Base / Apple-like UI
+       --------------------- */
+    :root {
+      --bg: #ffffff;
+      --fg: #0b0b0c;
+      --muted: #6b7280; /* slate-500 */
+      --card: #f8f9fb;
+      --border: #e5e7eb;
+      --accent: #0a84ff; /* Apple blue */
+      --accent-600: #0066cc;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --shadow-sm: 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------------
+       Header / Navbar
+       --------------- */
+    .nav {
+      position: sticky;
+      top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(10px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-logo {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: radial-gradient(60% 80% at 40% 30%, #7cc3ff 0%, #0a84ff 50%, #003e8a 100%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 6px 16px rgba(10,132,255,.25);
+    }
+    .brand-title { font-weight: 700; letter-spacing: .2px; }
+
+    .nav a {
+      color: var(--fg); text-decoration: none; font-weight: 500;
+    }
+    .nav-links { display: flex; gap: 18px; }
+    .nav-links a { opacity: .8; }
+    .nav-links a:hover, .nav-links a:focus { opacity: 1; color: var(--accent-600); }
+
+    /* -------
+       Hero
+       ------- */
+    .hero { padding: 64px 20px 28px; text-align: center; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .headline {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1.1; margin: 0 auto; max-width: 980px;
+    }
+    .headline .accent { background: linear-gradient(90deg, #0a84ff, #4fb2ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    .subhead { margin: 16px auto 0; max-width: 760px; color: var(--muted); font-size: clamp(16px, 2vw, 18px); }
+
+    /* ---------------
+       Certificates Grid
+       --------------- */
+    .grid { display: grid; gap: 24px; padding: 36px 20px 64px; }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 1040px) { .grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+      display: flex; flex-direction: column;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+    .media { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+    .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .badge { position: absolute; left: 12px; top: 12px; padding: 6px 10px; font-size: 12px; font-weight: 700; letter-spacing: .3px; color: #fff; background: #0a84ff; border-radius: 999px; box-shadow: 0 6px 16px rgba(10,132,255,.35); }
+
+    .content { padding: 18px; display: grid; gap: 8px; }
+    .title { font-weight: 700; font-size: 18px; letter-spacing: .2px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .benefits { margin: 4px 0 10px; padding-left: 18px; }
+    .benefits li { margin: 4px 0; }
+
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 6px; }
+    .link {
+      color: #0a84ff; text-decoration: none; font-weight: 600;
+    }
+    .link:hover { text-decoration: underline; }
+
+    /* --------
+       About + Footer
+       -------- */
+    .section { padding: 40px 20px 72px; border-top: 1px solid var(--border); background: #fff; }
+    .section h2 { font-size: clamp(22px, 3vw, 28px); margin: 0 auto 10px; max-width: 900px; }
+    .section p { color: var(--muted); max-width: 900px; margin: 0 auto; }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 20px; color: var(--muted); text-align: center; }
+
+    /* Focus states */
+    a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <header class="nav">
+    <div class="nav-inner container">
+      <a class="brand" href="#top" aria-label="Debrup Home">
+        <span class="brand-logo" aria-hidden="true"></span>
+        <span class="brand-title">Debrup</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#certs">Certificates</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="top" class="hero">
+    <div class="container">
+      <h1 class="headline">Apple‑style showcase of my
+        <span class="accent">Professional Badges & Certificates</span>
+      </h1>
+      <p class="subhead">Visual, minimal, and fast. Each certificate highlights its image, time investment, and real‑world benefits.</p>
+    </div>
+  </main>
+
+  <!-- Certificates Grid -->
+  <section id="certs" class="container grid" aria-label="Certificates">
+
+    <!-- Card 1 -->
+    <article class="card">
+      <div class="media">
+        <img src="https://images.unsplash.com/photo-1526378722442-49f2b19b4dc3?q=80&w=1200&auto=format&fit=crop" alt="Cloud computing certificate banner" />
+        <span class="badge" aria-label="30 hours">30h</span>
+      </div>
+      <div class="content">
+        <h3 class="title">Cloud Computing Fundamentals</h3>
+        <div class="meta">Completed 2024 • Foundational cloud architecture & deployment</div>
+        <ul class="benefits">
+          <li>Understood IaaS, PaaS, SaaS trade‑offs</li>
+          <li>Hands‑on with scaling & cost controls</li>
+          <li>Improved CI/CD readiness</li>
+        </ul>
+        <div class="row">
+          <a class="link" href="#" aria-label="View credential for Cloud Computing Fundamentals">View credential</a>
+          <span class="meta">30 hours</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card">
+      <div class="media">
+        <img src="https://images.unsplash.com/photo-1551281044-8b89aacd0d87?q=80&w=1200&auto=format&fit=crop" alt="AI & machine learning certificate banner" />
+        <span class="badge" aria-label="45 hours">45h</span>
+      </div>
+      <div class="content">
+        <h3 class="title">AI & Machine Learning</h3>
+        <div class="meta">Completed 2024 • Practical ML for production</div>
+        <ul class="benefits">
+          <li>Built supervised & unsupervised models</li>
+          <li>Neural networks & evaluation discipline</li>
+          <li>Deployed edge & cloud inference</li>
+        </ul>
+        <div class="row">
+          <a class="link" href="#" aria-label="View credential for AI & Machine Learning">View credential</a>
+          <span class="meta">45 hours</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card">
+      <div class="media">
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Cybersecurity certificate banner" />
+        <span class="badge" aria-label="20 hours">20h</span>
+      </div>
+      <div class="content">
+        <h3 class="title">Cybersecurity Essentials</h3>
+        <div class="meta">Completed 2023 • Threat modeling & controls</div>
+        <ul class="benefits">
+          <li>Practiced incident triage & response</li>
+          <li>Hardened endpoints & networks</li>
+          <li>Policy & compliance fundamentals</li>
+        </ul>
+        <div class="row">
+          <a class="link" href="#" aria-label="View credential for Cybersecurity Essentials">View credential</a>
+          <span class="meta">20 hours</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2>About Debrup</h2>
+      <p>Engineer focused on clean experiences and measurable impact. This page spotlights selected badges that demonstrate depth (hours), practical skills, and what they unlocked for my work. Want to collaborate or verify credentials? Get in touch.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section" aria-label="Contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Email: <a class="link" href="mailto:debrup@example.com">debrup@example.com</a> · LinkedIn/GitHub: add your links here.</p>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="y"></span> Debrup. All rights reserved.
+  </footer>
+
+  <script>
+    // Set current year in footer.
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
